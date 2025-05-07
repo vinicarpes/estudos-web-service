@@ -3,6 +3,7 @@ package br.edu.ifsc.fln.crudprodutoapi.controller;
 import br.edu.ifsc.fln.crudprodutoapi.domain.Categoria;
 import br.edu.ifsc.fln.crudprodutoapi.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,9 @@ public class CategoriaController {
         return categoriaRepository.findAll();
     }
 
-    @PostMapping("/novo")
-    public void criar(@RequestBody Categoria categoria){
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void inserir(@RequestBody Categoria categoria){
         categoriaRepository.save(categoria);
     }
 
@@ -36,7 +38,7 @@ public class CategoriaController {
 
     @GetMapping("/descricao/{descricao}")
     public ResponseEntity<List<Categoria>> get(@PathVariable String descricao){
-        List<Categoria> categorias = categoriaRepository.findByDescricao(descricao);
+        List<Categoria> categorias = categoriaRepository.findByDescricaoContaining(descricao);
         if (!categorias.isEmpty()){
             return ResponseEntity.ok(categorias);
         }

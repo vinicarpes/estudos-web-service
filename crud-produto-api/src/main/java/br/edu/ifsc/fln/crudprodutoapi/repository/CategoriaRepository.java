@@ -11,5 +11,6 @@ public interface CategoriaRepository
         extends JpaRepository<Categoria, Integer> {
 
     public List<Categoria> findByDescricao(String descricao);
+    public List<Categoria> findByDescricaoContaining(String descricao);
 
 }
