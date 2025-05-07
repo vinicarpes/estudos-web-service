@@ -57,4 +57,13 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable int id){
+        if(!categoriaRepository.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }else{
+            categoriaRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
