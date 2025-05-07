@@ -27,6 +27,17 @@ public class CategoriaController {
         categoriaRepository.save(categoria);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> atualizar(@PathVariable int id,@RequestBody Categoria categoria){
+        if(!categoriaRepository.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }else {
+            categoria.setId(id);
+            Categoria categoriaAtualizada = categoriaRepository.save(categoria);
+            return ResponseEntity.ok(categoriaAtualizada);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> get(@PathVariable int id){
         Optional<Categoria> categoria = categoriaRepository.findById(id);
