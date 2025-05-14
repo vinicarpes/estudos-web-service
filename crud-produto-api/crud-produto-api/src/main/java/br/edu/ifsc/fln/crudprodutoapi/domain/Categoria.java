@@ -1,28 +1,26 @@
 package br.edu.ifsc.fln.crudprodutoapi.domain;
 
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
-@Entity
-public class Produto {
+//@Data
+@Entity(name = "categoria")
+public class Categoria {
+//    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome;
     private String descricao;
-    private BigDecimal valor;
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
-    private int quantidade;
+
 
 
 }
